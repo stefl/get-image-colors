@@ -37,8 +37,17 @@ function paletteFromBitmap (filename, type, callback) {
 
   getPixels(filename, type, function (err, pixels) {
     if (err) return callback(err)
-    const palette = getRgbaPalette(pixels.data, 5).map(function (rgba) {
-      return chroma(rgba)
+    const palette = getRgbaPalette.bins(pixels.data, 10).map(function (bin) {
+      return({
+        color:
+          {
+            red: bin.color[0],
+            green: bin.color[1],
+            blue: bin.color[2]
+          },
+         score: bin.amount,
+         pixelFraction: bin.amount
+      })
     })
 
     return callback(null, palette)
