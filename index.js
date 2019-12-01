@@ -41,13 +41,8 @@ function paletteFromBitmap(filename, type, bins, quality, filter, callback) {
       .bins(pixels.data, bins, quality, filter)
       .map(function(bin) {
         return {
-          color: {
-            red: bin.color[0],
-            green: bin.color[1],
-            blue: bin.color[2]
-          },
-          score: bin.amount,
-          pixelFraction: bin.amount
+          rgb: bin,
+          score: bin.amount
         };
       });
 
